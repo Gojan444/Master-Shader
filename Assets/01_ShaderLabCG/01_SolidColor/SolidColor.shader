@@ -17,6 +17,40 @@ Shader "Custom/SolidColor"
             //CG
             CGPROGRAM
             //Codigo CG aqui
+            //pragma
+            #pragma vertex vertexShader
+            #pragma fragment fragmentShader
+
+            uniform fixed4 _Color;
+
+            //VERTEX INPUT
+            struct vertexInput
+            {
+                //Guardara la posicion de los vertices en x, y, z, w
+                fixed4 vertex : POSITION; 
+            };
+
+            //VERTEX OUTPUT
+            struct vertexOutput
+            {
+                fixed4 position : SV_POSITION;
+                fixed4 color : COLOR; 
+            };
+            //VERTEX SHADER
+            vertexOutput vertexShader(vertexInput i)
+            {
+                vertexOutput o; 
+                o.position = UnityObjectToClipPos(i.vertex);
+                o.color =  _Color; 
+                return o;
+            }
+
+            //FRAGMENT SHADER
+            /*fixed4 fragmentShader (vertexOutput o) : SV_TARGET
+            {
+                return o.color;
+            }*/ 
+            
             ENDCG
         }
     }
