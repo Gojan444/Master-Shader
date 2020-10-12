@@ -50,7 +50,19 @@ Shader "Custom/SolidColor"
             {
                 return o.color;
             }*/ 
-            
+            struct pixelOutput 
+            {
+                fixed4 pixel : SV_TARGET; 
+            };
+
+            pixelOutput fragmentShader(vertexOutput o)
+            {
+                pixelOutput p; 
+                p.pixel = o.color;
+                return p; 
+            }
+
+
             ENDCG
         }
     }
